@@ -7,9 +7,18 @@ class LegalEntiytRepository(LegalEntityRepositoryInterface):
    def __init__(self, db_connection):
       self.__db_connection = db_connection
       
-   def create_entity(self, legal_entity: LegalEntityTable):
+   def create_entity(self, billing: float, age: int, trade_name: str, phone_number: str, corporate_email: str, category: str, balance: float):
       with self.__db_connection as database:
          try:
+            legal_entity = LegalEntityTable(
+               billing=billing,
+               age=age,
+               trade_name=trade_name,
+               phone_number=phone_number,
+               corporate_email=corporate_email,
+               category=category,
+               balance=balance
+            )
             database.session.add(legal_entity)
             database.session.commit()
          except Exception as exception:

@@ -6,7 +6,7 @@ from src.models.sqlite.entities.legal_entity import LegalEntityTable
 class LegalEntityRepositoryInterface(ABC):
    
    @abstractmethod
-   def create_entity(self, legal_entity: LegalEntityTable):
+   def create_entity(self, billing: float, age: int, trade_name: str, phone_number: str, corporate_email: str, category: str, balance: float):
       pass
    
    @abstractmethod
