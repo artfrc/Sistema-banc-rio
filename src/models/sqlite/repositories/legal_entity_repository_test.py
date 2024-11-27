@@ -28,24 +28,26 @@ class MockConnection:
 def test_create_entity_integration():
    db_connect_handle.connect_to_db()
    repo = LegalEntiytRepository(db_connect_handle)
-   entity = LegalEntityTable(
-      billing=150000, age=30,
-      trade_name="Enterprise ABC", phone_number="1234-5678",
-      corporate_email="contact@abc.com", category="Category B",
-      balance=100000
-   )
-   repo.create_entity(entity)
+   repo.create_entity(
+      billing=150000, 
+      age=30, 
+      trade_name="Enterprise ABC", 
+      phone_number="1234-5678", 
+      corporate_email="contact@abc.com", 
+      category="Category B", 
+      balance=100000)
    
 def test_create_entity():
    mock_connection = MockConnection()
    repo = LegalEntiytRepository(mock_connection)
-   entity = LegalEntityTable(
-      billing=150000, age=30,
-      trade_name="Enterprise ABC", phone_number="1234-5678",
-      corporate_email="contact@abc.com", category="Category B",
-      balance=100000
-   )
-   repo.create_entity(entity)
+   repo.create_entity(
+      billing=150000, 
+      age=30, 
+      trade_name="Enterprise ABC", 
+      phone_number="1234-5678", 
+      corporate_email="contact@abc.com", 
+      category="Category B", 
+      balance=100000)
    
    mock_connection.session.add.assert_called_once()
    mock_connection.session.commit.assert_called_once()

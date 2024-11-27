@@ -3,7 +3,7 @@ from src.view.http_types.http_request import HttpRequest
 from src.view.http_types.http_response import HttpResponse
 from .interfaces.view_interface import ViewInterface
 
-class LegalEntityPersonFinderView(ViewInterface):
+class LegalEntityPersonDeleterView(ViewInterface):
     def __init__(self, controller: LegalEntityDeleterControllerInterface):
         self.__controller = controller
 
