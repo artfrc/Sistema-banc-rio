@@ -12,7 +12,7 @@ class NaturalPersonFinderController(NaturalPersonFinderControllerInterface):
       return self.__format_response_for_entity(entity)
    
    def __find_entity_in_db(self, entity_id: int) -> NaturalPersonTable:
-      entity = self.__entity_repository.get_entity_by_id(entity_id)
+      entity = self.__entity_repository.get_person_by_id(entity_id)
       if not entity:
          raise Exception('Entity not found')
       

@@ -9,5 +9,5 @@ class NaturalPersonFinderControllerView(ViewInterface):
 
     def handle(self, http_request: HttpRequest) -> HttpResponse:
         natural_person_id = http_request.param["natural_person_id"]
-        body_response = self.__controller.find_natural_person(natural_person_id)
+        body_response = self.__controller.find_entity(natural_person_id)
         return HttpResponse(status_code=200, body=body_response)
