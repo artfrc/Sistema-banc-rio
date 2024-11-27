@@ -1,6 +1,7 @@
 from src.models.sqlite.interfaces.legal_entity_repository_interface import LegalEntityRepositoryInterface
+from .interfaces.legal_entity_deleter_controller import LegalEntityDeleterControllerInterface
 
-class LegalEntityDeleterController:
+class LegalEntityDeleterController(LegalEntityDeleterControllerInterface):
    def __init__(self, entity_repository: LegalEntityRepositoryInterface):
       self.__entity_repository = entity_repository
       

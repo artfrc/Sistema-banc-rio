@@ -2,8 +2,9 @@ from typing import Dict
 import re
 from src.models.sqlite.interfaces.natural_person_repository_interface import NaturalPersonRepositoryInterface
 from src.models.sqlite.entities.natural_person import NaturalPersonTable
+from .interfaces.natural_person_withdraw_money_controller import NaturalPersonWithdrawMoneyControllerInterface
 
-class NaturalPersonWithdrawMoneyController:
+class NaturalPersonWithdrawMoneyController(NaturalPersonWithdrawMoneyControllerInterface):
     def __init__(self, entity_repository: NaturalPersonRepositoryInterface):
         self.__entity_repository = entity_repository
         self.__max_amount = 10000

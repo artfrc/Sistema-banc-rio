@@ -1,8 +1,9 @@
-from typing import Dict, List
+from typing import Dict
 from src.models.sqlite.interfaces.legal_entity_repository_interface import LegalEntityRepositoryInterface
 from src.models.sqlite.entities.legal_entity import LegalEntityTable
+from .interfaces.legal_entity_finder_controller import LegalEntityFinderControllerInterface
 
-class LegalEntityFinderController:
+class LegalEntityFinderController(LegalEntityFinderControllerInterface):
    def __init__(self, entity_repository: LegalEntityRepositoryInterface):
       self.__entity_repository = entity_repository
       
@@ -16,18 +17,6 @@ class LegalEntityFinderController:
          raise Exception('Entity not found')
       
       return entity
-   
-   def find_all_entities(self) -> Dict:
-      entities = self.__find_all_entities_in_db()
-      return self.__format_response_for_all_entities(entities)
-   
-   def __find_all_entities_in_db(self) -> List[LegalEntityTable]:
-      entities = self.__entity_repository.list_all()
-      
-      if not entities:
-         raise Exception('No entities found')
-      
-      return entities
    
    def __format_response_entity(self, entity: LegalEntityTable) -> Dict:
       return {
@@ -43,20 +32,3 @@ class LegalEntityFinderController:
             }
          }
       }
-      
-   def __format_response_for_all_entities(self, entities: List[LegalEntityTable]) -> Dict:
-      return {
-         "data": {
-            "type": "Legal Entity",
-            "count": len(entities),
-            "attributes": [
-               {
-                  "age": entity.age,
-                  "trade name": entity.trade_name,
-                  "phone number": entity.phone_number,
-                  "corporate email": entity.corporate_email,
-               }
-               for entity in entities
-            ]
-         }
-      }      
