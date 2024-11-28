@@ -3,6 +3,7 @@ from src.view.http_types.http_request import HttpRequest
 
 from src.main.composer.natural_person_finder_composer import natural_person_finder_composer
 from src.main.composer.natural_person_creator_composer import natural_person_creator_composer
+from src.main.composer.natural_person_deleter_composer import natural_person_deleter_composer
 
 natural_person_bp = Blueprint('natural_person', __name__)
 
@@ -21,3 +22,12 @@ def create_person():
     http_response = view.handle(http_request)
 
     return jsonify(http_response.body), http_response.status_code
+
+@natural_person_bp.route('/natural_person/<person_id>', methods=['DELETE'])
+def delete_person(person_id):
+    http_request = HttpRequest(param={'person_id': person_id})
+    view = natural_person_deleter_composer()
+    http_response = view.handle(http_request)
+
+    return jsonify(http_response.body), http_response.status_code
+
