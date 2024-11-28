@@ -1,6 +1,7 @@
 from typing import Dict
 import re
 from src.models.sqlite.interfaces.natural_person_repository_interface import NaturalPersonRepositoryInterface
+from src.models.sqlite.entities.natural_person import NaturalPersonTable
 from .interfaces.natural_person_creator_controller import NaturalPersonCreatorControllerInterface
 
 class NaturalPersonCreatorController(NaturalPersonCreatorControllerInterface):
@@ -28,7 +29,7 @@ class NaturalPersonCreatorController(NaturalPersonCreatorControllerInterface):
       if monthly_income < 0 or age < 0 or balance < 0:
          raise Exception('Monthly income, age and balance must be greater than 0')
       
-      no_valid_characters_only_numbers = re.compile(r'[^0-9]')
+      no_valid_characters_only_numbers = re.compile(r'[^0-9-]')
       no_valid_characters_only_numbers_and_dot = re.compile(r'[^0-9.]')
       
       if (
@@ -51,7 +52,16 @@ class NaturalPersonCreatorController(NaturalPersonCreatorControllerInterface):
          raise Exception('Email invalid')
       
    def __insert_entity(self, monthly_income: float, age: int, name: str, phone_number: str, email: str, category: str, balance: float):
-      self.__entity_repository.create_natural_person(monthly_income, age, name, phone_number, email, category, balance)
+      natural_person = NaturalPersonTable(
+         monthly_income=monthly_income,
+         age=age,
+         name=name,
+         phone_number=phone_number,
+         email=email,
+         category=category,
+         balance=balance
+      )
+      self.__entity_repository.create_natural_person(natural_person)
       
    def __format_response(self, entity_data: Dict) -> Dict:
       return {

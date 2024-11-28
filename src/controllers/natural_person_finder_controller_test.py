@@ -8,7 +8,7 @@ class MockNaturalPerson:
       self.email = email
 
 class MockNaturalPersonRepository:
-   def get_entity_by_id(self, entity_id: int): # pylint: disable=W0613, unused-argument
+   def get_person_by_id(self, entity_id: int): # pylint: disable=W0613, unused-argument
       return MockNaturalPerson(
          age = 25,
          name = 'John Doe',

@@ -1,8 +1,10 @@
 import pytest
+
+from src.models.sqlite.entities.natural_person import NaturalPersonTable
 from .natural_person_creator_controller import NaturalPersonCreatorController
 
 class MockNaturalPersonRepository:
-   def create_natural_person(self, monthly_income: float, age: int, name: str, phone_number: str, email: str, category: str, balance: float):
+   def create_natural_person(self, natural_person: NaturalPersonTable):
       pass
    
 def test_create_entity():
