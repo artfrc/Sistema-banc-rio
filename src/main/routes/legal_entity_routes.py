@@ -18,7 +18,7 @@ def get_entity(entity_id):
     return jsonify(http_response.body), http_response.status_code 
 
 @legal_entity_bp.route('/legal_entity', methods=['POST'])
-def create_person():
+def create_entity():
     http_request = HttpRequest(body=request.json)
     view = legal_entity_person_creator_composer()
     http_response = view.handle(http_request)
