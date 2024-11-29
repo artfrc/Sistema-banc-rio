@@ -4,6 +4,7 @@ from src.main.composer.legal_entity_finder_composer import legal_entity_finder_c
 from src.main.composer.legal_entity_creator_composer import legal_entity_person_creator_composer
 from src.main.composer.legal_entity_lister_composer import legal_entity_person_lister_composer
 from src.main.composer.legal_entity_deleter_composer import legal_entity_person_deleter_composer
+from src.main.composer.legal_entity_with_draw_money_composer import legal_entity_person_withdaw_money_composer
 
 from src.view.http_types.http_request import HttpRequest
 
@@ -36,6 +37,14 @@ def list_entities():
 def delete_entity(entity_id):
     http_request = HttpRequest(param={'entity_id': entity_id})
     view = legal_entity_person_deleter_composer()
+    http_response = view.handle(http_request)
+
+    return jsonify(http_response.body), http_response.status_code
+
+@legal_entity_bp.route('/legal_entity/withdrawmoney', methods=['POST'])
+def withdraw_money():
+    http_request = HttpRequest(body=request.json)
+    view = legal_entity_person_withdaw_money_composer()
     http_response = view.handle(http_request)
 
     return jsonify(http_response.body), http_response.status_code

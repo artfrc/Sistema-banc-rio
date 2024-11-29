@@ -22,4 +22,3 @@ class DbConnectionHandle:
       self.session.close()
       
 db_connect_handle = DbConnectionHandle()
-   
